@@ -1,0 +1,23 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64-vagrant.box"
+
+  # Use a private network so that we don't have to worry about forwarding ports
+  config.vm.network "private_network", ip: "10.128.100.41"
+  config.vm.network "forwarded_port", guest: 27017, host: 27017, auto_correct: true
+  config.vm.network "public_network", type: "dhcp", bridge: "eth0"
+  
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+
+    # Only allow drift of 1 sec, instead of 20 min defaultmongo
+    v.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000 ]
+  end
+
+  # Bootstrap script for configuring VM
+  config.vm.provision :shell, path: "bootstrap.sh"
+
+  # Use nfs instead of the default folder sync as otherwise VirtualBox will crash periodically
+  config.vm.synced_folder "../source", "/vagrant"
+
+end
