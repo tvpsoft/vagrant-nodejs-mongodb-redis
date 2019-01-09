@@ -18,5 +18,9 @@ npm install -g pm2
 # Install AJV
 npm install -g ajv
 
+# NOTE need to run this on lib
+npm install xxhash
+npm install iconv
+
 # Required for node-gyp and leveldown. TODO: remove once this is no longer required
 apt-get install python
