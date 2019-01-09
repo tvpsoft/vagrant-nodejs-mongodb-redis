@@ -3,7 +3,7 @@
 /vagrant/ubuntu.sh
 
 /vagrant/nodejs.sh
-/vagrant/extras/redis.sh
+
 
 /vagrant/phantomjs.sh
 
@@ -11,8 +11,10 @@
 
 /vagrant/docker.sh
 
+/vagrant/extras/redis.sh
+
 # Add hosts
-echo "127.0.0.1 w-mongo.dev" >> /etc/hosts
+echo "127.0.0.1 w-redis.dev" >> /etc/hosts
 
 # Default to app dir
 echo "cd /vagrant/wissl" >> /home/vagrant/.bashrc
